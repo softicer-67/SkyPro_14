@@ -15,18 +15,14 @@ def load_file():
 def filter_func(method: str, data):
     res = []
     if method == 'POST':
-        for item in data:
-            if 'POST' in item:
-                res.append(item)
+        res = [item for item in data if 'POST' in item]
 
     elif method == 'GET':
-        for item in data:
-            if 'GET' in item:
-                res.append(item)
+        res = [item for item in data if 'GET' in item]
     return res
 
 
-def limit_func(num: int, data: str):
+def limit_func(num: int, data: list):
     return [data[item] for item in range(num)]
 
 
@@ -35,6 +31,7 @@ def map_func(num: int, data: list):
     if num > 5:
         print('Индекс превышен !')
         return res
+
     for item in data:
         tmp = item.split(' ')
 
@@ -44,7 +41,7 @@ def map_func(num: int, data: list):
             res.append(tmp[3] + ']')
         elif num > 1:
             res.append(tmp[num + 3])
-    return res
+        return res
 
 
 def unique_func(arg, data):
