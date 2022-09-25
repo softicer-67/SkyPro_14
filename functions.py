@@ -55,6 +55,6 @@ def unique_func(arg, data):
 
 def sort_func(method, data):
     if method == 'asc':
-        return sorted(data)
+        return sorted(data, key=lambda x: tuple(map(int, x.split('.'))))
     elif method == 'desc':
-        return sorted(data, reverse=True)
+        return sorted(data, key=lambda x: tuple(map(int, x.split('.'))), reverse=True)
