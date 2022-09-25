@@ -1,3 +1,6 @@
+from typing import List
+
+
 def load_file():
     with open('apache_logs.txt', 'r') as f:
         file = f.read()
@@ -9,7 +12,7 @@ def load_file():
     return res
 
 
-def filter_func(method: str, data: str):
+def filter_func(method: str, data):
     res = []
     if method == 'POST':
         for item in data:
@@ -20,7 +23,6 @@ def filter_func(method: str, data: str):
         for item in data:
             if 'GET' in item:
                 res.append(item)
-
     return res
 
 
@@ -28,22 +30,31 @@ def limit_func(num: int, data: str):
     return [data[item] for item in range(num)]
 
 
-def map_func(num: int, data):
-    res = []
+def map_func(num: int, data: list):
+    res: List[str] = []
+    if num > 5:
+        print('Индекс превышен !')
+        return res
     for item in data:
         tmp = item.split(' ')
-        tmp[1] = tmp[3] + ']'
-        tmp[2] = tmp[5]
-        tmp[3] = tmp[6]
-        tmp[4] = tmp[7]
-        tmp[5] = tmp[8]
-        res.append(tmp[num])
+
+        if num == 0:
+            res.append(tmp[num])
+        elif num == 1:
+            res.append(tmp[3] + ']')
+        elif num > 1:
+            res.append(tmp[num + 3])
     return res
 
 
 def unique_func(arg, data):
-    pass
+    if arg == '-':
+        return set(data)
+    return data
 
 
-def sort_func(method: str, data):
-    pass
+def sort_func(method, data):
+    if method == 'asc':
+        return sorted(data)
+    elif method == 'desc':
+        return sorted(data, reverse=True)

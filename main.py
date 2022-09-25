@@ -5,7 +5,7 @@ def main():
     file = load_file()
     res = []
     # command = input(f'Введите команду из доступных через |: filter, map, limit, sort, unique\n>>> ')
-    command = 'filter POST | limit 4 | map 0'
+    command = 'filter GET | limit 50 | map 0 | unique - | sort desc '
 
     commands = command.split(' | ')
     for idx, item in enumerate(commands):
@@ -22,16 +22,16 @@ def main():
         elif cmd_name == 'map':
             res = map_func(int(cmd_arg), file if idx == 0 else res)
 
-        # elif cmd_name == 'unique':
-        #     res = unique_func(cmd_arg, file if idx == 0 else res)
+        elif cmd_name == 'unique':
+            res = unique_func(cmd_arg, file if idx == 0 else res)
 
-        # elif cmd_name == 'sort':
-        #     res = map_func(cmd_arg, file if idx == 0 else res)
+        elif cmd_name == 'sort':
+            res = sort_func(cmd_arg, file if idx == 0 else res)
 
     for item in res:
         res = str(item).split(' ')
         ln = len(res)
-        if ln == 1:
+        if ln < 6:
             print(f"{res[0]}")
         else:
             print(f"{res[0]} {res[3]}] {res[5]} {res[6]} {res[7]} {res[8]}")
