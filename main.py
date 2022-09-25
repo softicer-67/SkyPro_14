@@ -5,7 +5,7 @@ def main():
     file = load_file()
     res = []
     # command = input(f'Введите команду из доступных через |: filter, map, limit, sort, unique\n>>> ')
-    command = 'filter GET | limit 5 | map 0 | unique - | sort asc'
+    command = 'filter GET | limit 10 | map 1 | unique - | sort asc'
 
     commands = command.split(' | ')
     try:
