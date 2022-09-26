@@ -1,3 +1,4 @@
+import re
 from typing import List
 
 
@@ -12,17 +13,11 @@ def load_file():
     return res
 
 
-def filter_func(method: str, data):
+def filter_func(value: str, data):
     res = []
-    if method == 'POST':
-        for item in data:
-            if 'POST' in item:
-                res.append(item)
-
-    elif method == 'GET':
-        for item in data:
-            if 'GET' in item:
-                res.append(item)
+    for item in data:
+        if value in item:
+            res.append(item)
     return res
 
 
@@ -58,3 +53,6 @@ def sort_func(method, data):
         return sorted(data)
     elif method == 'desc':
         return sorted(data, reverse=True)
+
+
+    # return sorted(data, key=lambda x: tuple(map(int, x.split(' '))))
